@@ -1,20 +1,33 @@
 """
-SuperMini Level Shifter — top-level module.
+SuperMini Level Shifter + LED Driver — top-level module.
 
-ESP32-S3 Super Mini (via 2x 1x9 female headers) + SN74AHCT125N quad bus buffer
-(DIP-14 socket) + 68 ohm series resistors on data outputs + 100nF decoupling cap
-on IC VCC + dual 3-pin 2.54mm screw terminals (top/bottom orientation choice).
+Power path:
+  USB-C PD charger → PD trigger board (12V) → pwr_in header on this PCB
+  12V → buck module (MP1584EN) → 5V → ESP32 5V pin + SN74AHCT125N VCC
+  12V → screw terminals pin 1 → SK6812 RGBW LED strip power (direct, up to ~120 LEDs @ 3A)
 
-Level shifter converts ESP32 GP1–GP2 outputs from 3.3V → 5V logic for
-parallel WS2812B/SK6812 LED strip segments (e.g. HyperK/HyperHDR ambilight).
+Signal path:
+  ESP32 GP1/GP2 (3.3V) → SN74AHCT125N → 5V logic → 68Ω series resistor → screw terminal pin 2
 
-Screw terminal pinout (both terminals identical — choose the accessible side):
-  Pin 1: OUT1 (GP1 level-shifted, via 68R) — LED segment 1 data
-  Pin 2: OUT2 (GP2 level-shifted, via 68R) — LED segment 2 data
+Screw terminal pinout (both terminals, one per channel):
+  Pin 1: +12V  — LED strip power (direct from PD trigger, NOT through buck)
+  Pin 2: DATA  — level-shifted 5V data signal (via 68Ω)
   Pin 3: GND
 
-IC VCC powered from ESP32 5V pin.
-Power for LED strips should come from a dedicated 5V supply.
+Terminal A (term_a): Channel 1 — GP1 data
+Terminal B (term_b): Channel 2 — GP2 data
+
+PD trigger board connection:
+  Solder short wire leads from PD board + pad → pwr_in pin 1
+                                   PD board − pad → pwr_in pin 2
+  Configure PD trigger board for 12V output before soldering.
+
+Buck module connection:
+  Solder wire leads from buck module edge pads to buck 2x2 header on PCB:
+    Buck IN+  → header pin 1
+    Buck IN−  → header pin 2
+    Buck OUT+ → header pin 3
+    Buck OUT− → header pin 4
 """
 
 from "esp32s3_super_mini.ato" import ESP32S3SuperMini
@@ -22,43 +35,64 @@ from "parts/SN74AHCT125N/SN74AHCT125N.ato" import SN74AHCT125N_package
 from "parts/ScrewTerminal_2.54_3P/ScrewTerminal_2.54_3P.ato" import ScrewTerminal_2x54_3P_package
 from "parts/Resistor_TH_68R/Resistor_TH_68R.ato" import Resistor_TH_68R_package
 from "parts/Capacitor_TH_100nF/Capacitor_TH_100nF.ato" import Capacitor_TH_100nF_package
+from "parts/BuckModule_5V/BuckModule_5V.ato" import BuckModule_5V_package
+from "parts/PowerConnector_1x2/PowerConnector_1x2.ato" import PowerConnector_1x2_package
 
 module LevelShifter:
 
     mcu    = new ESP32S3SuperMini
     ic     = new SN74AHCT125N_package
-    term_a = new ScrewTerminal_2x54_3P_package
-    term_b = new ScrewTerminal_2x54_3P_package
-    res1   = new Resistor_TH_68R_package   # series resistor on OUT1
-    res2   = new Resistor_TH_68R_package   # series resistor on OUT2
-    cap1   = new Capacitor_TH_100nF_package  # decoupling cap on IC VCC
+    term_a = new ScrewTerminal_2x54_3P_package   # channel 1: GP1
+    term_b = new ScrewTerminal_2x54_3P_package   # channel 2: GP2
+    res1   = new Resistor_TH_68R_package         # series resistor on DATA1
+    res2   = new Resistor_TH_68R_package         # series resistor on DATA2
+    cap1   = new Capacitor_TH_100nF_package      # decoupling cap on IC VCC
+    buck   = new BuckModule_5V_package           # 12V → 5V for ESP32 + IC
+    pwr_in = new PowerConnector_1x2_package      # 12V input from PD trigger board
 
-    # ── Power ─────────────────────────────────────────────────────────────────
-    mcu.vcc_5v ~ ic.14   # IC VCC from ESP32 5V pin
-    mcu.gnd    ~ ic.7    # IC GND
+    # ── 12V power input (from PD trigger board via wire leads) ────────────────
+    pwr_in.1 ~ mcu.vcc_5v   # 12V net — NOTE: vcc_5v here is just a net name;
+                              # actual 12V only reaches screw terminals and buck IN+
+    pwr_in.2 ~ mcu.gnd
+
+    # ── Buck module: 12V → 5V ─────────────────────────────────────────────────
+    pwr_in.1  ~ buck.1      # IN+  ← 12V
+    mcu.gnd   ~ buck.2      # IN−  ← GND
+    mcu.vcc_5v ~ buck.3     # OUT+ → 5V rail (ESP32 5V pin + IC VCC)
+    mcu.gnd   ~ buck.4      # OUT− ← GND
+
+    # ── IC power from 5V buck output ──────────────────────────────────────────
+    mcu.vcc_5v ~ ic.14      # IC VCC (5V)
+    mcu.gnd    ~ ic.7       # IC GND
 
     # ── Decoupling cap across IC VCC/GND ──────────────────────────────────────
     mcu.vcc_5v ~ cap1.1
     mcu.gnd    ~ cap1.2
 
     # ── ~OE pins all tied low (outputs always enabled) ────────────────────────
-    mcu.gnd ~ ic.1       # ~1OE
-    mcu.gnd ~ ic.4       # ~2OE
-    mcu.gnd ~ ic.10      # ~3OE
-    mcu.gnd ~ ic.13      # ~4OE
+    mcu.gnd ~ ic.1          # ~1OE
+    mcu.gnd ~ ic.4          # ~2OE
+    mcu.gnd ~ ic.10         # ~3OE
+    mcu.gnd ~ ic.13         # ~4OE
 
     # ── ESP32 GP1–GP2 → level shifter inputs (channels 1 & 2) ────────────────
-    mcu.gp1 ~ ic.2       # GP1 → 1A
-    mcu.gp2 ~ ic.5       # GP2 → 2A
+    mcu.gp1 ~ ic.2          # GP1 → 1A
+    mcu.gp2 ~ ic.5          # GP2 → 2A
 
     # ── Unused channels 3 & 4: tie inputs to GND ─────────────────────────────
-    mcu.gnd ~ ic.9       # 3A → GND
-    mcu.gnd ~ ic.12      # 4A → GND
+    mcu.gnd ~ ic.9          # 3A → GND
+    mcu.gnd ~ ic.12         # 4A → GND
 
-    # ── Series resistors on outputs ───────────────────────────────────────────
-    ic.3 ~ res1.1; ic.6 ~ res2.1   # IC outputs → resistor inputs
+    # ── Series resistors on IC outputs ────────────────────────────────────────
+    ic.3 ~ res1.1           # 1Y → res1 in
+    ic.6 ~ res2.1           # 2Y → res2 in
 
-    # ── Resistor outputs → both screw terminals (electrically identical) ──────
-    res1.2 ~ term_a.1; res1.2 ~ term_b.1   # OUT1 via 68R
-    res2.2 ~ term_a.2; res2.2 ~ term_b.2   # OUT2 via 68R
-    mcu.gnd ~ term_a.3; mcu.gnd ~ term_b.3  # GND
+    # ── Screw terminal A — channel 1 (GP1): 12V | DATA | GND ─────────────────
+    pwr_in.1  ~ term_a.1    # +12V
+    res1.2    ~ term_a.2    # DATA1 (GP1 via 68Ω)
+    mcu.gnd   ~ term_a.3    # GND
+
+    # ── Screw terminal B — channel 2 (GP2): 12V | DATA | GND ─────────────────
+    pwr_in.1  ~ term_b.1    # +12V
+    res2.2    ~ term_b.2    # DATA2 (GP2 via 68Ω)
+    mcu.gnd   ~ term_b.3    # GND

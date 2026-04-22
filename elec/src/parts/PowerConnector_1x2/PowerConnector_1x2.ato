@@ -1,0 +1,20 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import is_atomic_part
+import has_part_picked
+
+component PowerConnector_1x2_package:
+    """
+    2-pin 2.54mm through-hole pin header. Used as the 12V power input from the
+    PD trigger board (solder short wire leads from PD board + and − pads to here).
+
+    Pin 1: +12V (from PD trigger board + pad)
+    Pin 2: GND  (from PD trigger board − pad)
+    """
+
+    trait is_atomic_part<manufacturer="Generic", partnumber="PinHeader_1x02_2.54mm", footprint="PinHeader_1x02_P2.54mm_Vertical.kicad_mod", symbol="", model="">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_HDR1X2", manufacturer="Generic", partno="PinHeader_1x02_2.54mm">
+    trait has_designator_prefix<prefix="J">
+
+    pin 1   # +12V
+    pin 2   # GND

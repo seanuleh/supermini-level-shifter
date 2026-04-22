@@ -35,4 +35,18 @@
 		(options "")
 		(descr "atopile: part lib: Capacitor_TH_100nF")
 	)
+	(lib
+		(name "BuckModule_5V")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/BuckModule_5V")
+		(options "")
+		(descr "atopile: part lib: BuckModule_5V")
+	)
+	(lib
+		(name "PowerConnector_1x2")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/PowerConnector_1x2")
+		(options "")
+		(descr "atopile: part lib: PowerConnector_1x2")
+	)
 )

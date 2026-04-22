@@ -1,0 +1,28 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import is_atomic_part
+import has_part_picked
+
+component BuckModule_5V_package:
+    """
+    MP1584EN-based DC-DC buck converter module, 12V→5V fixed output, 3A rated.
+    Module size: 22.3mm x 17mm. Connects via 4 wire leads to 2x2 through-hole header.
+
+    Sourced from AliExpress — search "MP1584EN mini buck 5V fixed output module".
+    Order the 5V fixed variant (NOT adjustable, NOT 3.3V).
+
+    Wiring (solder wires from module edge pads to PCB header):
+      Pin 1: IN+  — 12V from PD trigger board
+      Pin 2: IN−  — GND
+      Pin 3: OUT+ — 5V output → ESP32 5V pin + IC VCC
+      Pin 4: OUT− — GND
+    """
+
+    trait is_atomic_part<manufacturer="Generic", partnumber="BuckModule_MP1584EN_5V", footprint="PinHeader_2x02_P2.54mm_Vertical.kicad_mod", symbol="", model="">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_BUCKMOD5V", manufacturer="Generic", partno="BuckModule_MP1584EN_5V">
+    trait has_designator_prefix<prefix="U">
+
+    pin 1   # IN+
+    pin 2   # IN-
+    pin 3   # OUT+
+    pin 4   # OUT-
