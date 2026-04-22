@@ -1,0 +1,138 @@
+{
+  "version": "1.0",
+  "build_id": "da2bc8cf393a5206",
+  "components": [
+    {
+      "id": "cnone_hdr1x9f",
+      "lcsc": "CNONE_HDR1X9F",
+      "manufacturer": "Generic",
+      "mpn": "PinSocket_1x09_2.54mm",
+      "type": "connector",
+      "value": "",
+      "package": "Header1x9F:PinSocket_1x09_P2.54mm_Vertical",
+      "description": null,
+      "quantity": 2,
+      "unitCost": null,
+      "stock": null,
+      "isBasic": null,
+      "isPreferred": null,
+      "source": "manual",
+      "datasheet": null,
+      "parameters": [],
+      "usages": [
+        {
+          "address": "level_shifter.ato::LevelShifter.mcu|esp32s3_super_mini.ato::ESP32S3SuperMini.header_left|parts/Header1x9F/Header1x9F.ato::Header1x9F_package",
+          "designator": "J1"
+        },
+        {
+          "address": "level_shifter.ato::LevelShifter.mcu|esp32s3_super_mini.ato::ESP32S3SuperMini.header_right|parts/Header1x9F/Header1x9F.ato::Header1x9F_package",
+          "designator": "J2"
+        }
+      ]
+    },
+    {
+      "id": "cnone_r68r_th",
+      "lcsc": "CNONE_R68R_TH",
+      "manufacturer": "Generic",
+      "mpn": "R_68R_TH_1/8W",
+      "type": "resistor",
+      "value": "",
+      "package": "Resistor_TH_68R:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal",
+      "description": null,
+      "quantity": 2,
+      "unitCost": null,
+      "stock": null,
+      "isBasic": null,
+      "isPreferred": null,
+      "source": "manual",
+      "datasheet": null,
+      "parameters": [],
+      "usages": [
+        {
+          "address": "level_shifter.ato::LevelShifter.res1|parts/Resistor_TH_68R/Resistor_TH_68R.ato::Resistor_TH_68R_package",
+          "designator": "R1"
+        },
+        {
+          "address": "level_shifter.ato::LevelShifter.res2|parts/Resistor_TH_68R/Resistor_TH_68R.ato::Resistor_TH_68R_package",
+          "designator": "R2"
+        }
+      ]
+    },
+    {
+      "id": "cnone_screw3p254",
+      "lcsc": "CNONE_SCREW3P254",
+      "manufacturer": "Generic",
+      "mpn": "ScrewTerminal_2.54mm_3P",
+      "type": "connector",
+      "value": "",
+      "package": "ScrewTerminal_2.54_3P:TerminalBlock_Phoenix_MPT-0,5-3-2.54_1x03_P2.54mm_Horizontal",
+      "description": null,
+      "quantity": 2,
+      "unitCost": null,
+      "stock": null,
+      "isBasic": null,
+      "isPreferred": null,
+      "source": "manual",
+      "datasheet": null,
+      "parameters": [],
+      "usages": [
+        {
+          "address": "level_shifter.ato::LevelShifter.term_a|parts/ScrewTerminal_2.54_3P/ScrewTerminal_2.54_3P.ato::ScrewTerminal_2x54_3P_package",
+          "designator": "J3"
+        },
+        {
+          "address": "level_shifter.ato::LevelShifter.term_b|parts/ScrewTerminal_2.54_3P/ScrewTerminal_2.54_3P.ato::ScrewTerminal_2x54_3P_package",
+          "designator": "J4"
+        }
+      ]
+    },
+    {
+      "id": "cnone_c100nf_th",
+      "lcsc": "CNONE_C100NF_TH",
+      "manufacturer": "Generic",
+      "mpn": "C_100nF_TH_50V",
+      "type": "capacitor",
+      "value": "",
+      "package": "Capacitor_TH_100nF:C_Disc_D3.0mm_W1.6mm_P2.50mm",
+      "description": null,
+      "quantity": 1,
+      "unitCost": null,
+      "stock": null,
+      "isBasic": null,
+      "isPreferred": null,
+      "source": "manual",
+      "datasheet": null,
+      "parameters": [],
+      "usages": [
+        {
+          "address": "level_shifter.ato::LevelShifter.cap1|parts/Capacitor_TH_100nF/Capacitor_TH_100nF.ato::Capacitor_TH_100nF_package",
+          "designator": "C1"
+        }
+      ]
+    },
+    {
+      "id": "cnone_sn74ahct125n",
+      "lcsc": "CNONE_SN74AHCT125N",
+      "manufacturer": "Texas Instruments",
+      "mpn": "SN74AHCT125N",
+      "type": "ic",
+      "value": "",
+      "package": "SN74AHCT125N:DIP-14_W7.62mm",
+      "description": null,
+      "quantity": 1,
+      "unitCost": null,
+      "stock": null,
+      "isBasic": null,
+      "isPreferred": null,
+      "source": "manual",
+      "datasheet": null,
+      "parameters": [],
+      "usages": [
+        {
+          "address": "level_shifter.ato::LevelShifter.ic|parts/SN74AHCT125N/SN74AHCT125N.ato::SN74AHCT125N_package",
+          "designator": "U1"
+        }
+      ]
+    }
+  ]
+}

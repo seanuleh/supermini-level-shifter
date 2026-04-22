@@ -1,0 +1,19 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import is_atomic_part
+import has_part_picked
+
+component Resistor_TH_68R_package:
+    """
+    68 ohm 1/8W axial through-hole resistor (DIN 0204, 3.6mm body, 5.08mm pitch).
+    Series termination resistor on level-shifter data outputs.
+    Any 62-100 ohm 1/8W axial resistor is compatible.
+    Hand-solder only.
+    """
+
+    trait is_atomic_part<manufacturer="Generic", partnumber="R_68R_TH_1/8W", footprint="R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal.kicad_mod", symbol="", model="">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_R68R_TH", manufacturer="Generic", partno="R_68R_TH_1/8W">
+    trait has_designator_prefix<prefix="R">
+
+    pin 1
+    pin 2

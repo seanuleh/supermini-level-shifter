@@ -1,0 +1,20 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import is_atomic_part
+import has_part_picked
+
+component ScrewTerminal_2x54_3P_package:
+    """
+    3-pin 2.54mm pitch PCB mini screw terminal block. Through-hole, horizontal.
+    Pin 1: DATA1, Pin 2: DATA2, Pin 3: GND.
+    Compatible parts: Phoenix MPT-0.5/3-2.54, KF128-2.54-3P, or equivalent.
+    Hand-solder only.
+    """
+
+    trait is_atomic_part<manufacturer="Generic", partnumber="ScrewTerminal_2.54mm_3P", footprint="TerminalBlock_Phoenix_MPT-0,5-3-2.54_1x03_P2.54mm_Horizontal.kicad_mod", symbol="", model="">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_SCREW3P254", manufacturer="Generic", partno="ScrewTerminal_2.54mm_3P">
+    trait has_designator_prefix<prefix="J">
+
+    pin 1
+    pin 2
+    pin 3

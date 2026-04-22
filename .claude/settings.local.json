@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/sean/git/seanuleh/supermini-level-shifter/elec/src/parts/BuckModule_5V)",
+      "Bash(mkdir -p /Users/sean/git/seanuleh/supermini-level-shifter/elec/src/parts/PowerConnector_1x2)",
+      "Bash(cp /Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints/Connector_PinHeader_2.54mm.pretty/PinHeader_2x02_P2.54mm_Vertical.kicad_mod /Users/sean/git/seanuleh/supermini-level-shifter/elec/src/parts/BuckModule_5V/)",
+      "Bash(cp /Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints/Connector_PinHeader_2.54mm.pretty/PinHeader_1x02_P2.54mm_Vertical.kicad_mod /Users/sean/git/seanuleh/supermini-level-shifter/elec/src/parts/PowerConnector_1x2/)",
+      "Bash(ato build:*)",
+      "Bash(ato dev:*)"
+    ]
+  }
+}

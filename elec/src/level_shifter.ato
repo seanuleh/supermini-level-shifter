@@ -1,0 +1,64 @@
+"""
+SuperMini Level Shifter — top-level module.
+
+ESP32-S3 Super Mini (via 2x 1x9 female headers) + SN74AHCT125N quad bus buffer
+(DIP-14 socket) + 68 ohm series resistors on data outputs + 100nF decoupling cap
+on IC VCC + dual 3-pin 2.54mm screw terminals (top/bottom orientation choice).
+
+Level shifter converts ESP32 GP1–GP2 outputs from 3.3V → 5V logic for
+parallel WS2812B/SK6812 LED strip segments (e.g. HyperK/HyperHDR ambilight).
+
+Screw terminal pinout (both terminals identical — choose the accessible side):
+  Pin 1: OUT1 (GP1 level-shifted, via 68R) — LED segment 1 data
+  Pin 2: OUT2 (GP2 level-shifted, via 68R) — LED segment 2 data
+  Pin 3: GND
+
+IC VCC powered from ESP32 5V pin.
+Power for LED strips should come from a dedicated 5V supply.
+"""
+
+from "esp32s3_super_mini.ato" import ESP32S3SuperMini
+from "parts/SN74AHCT125N/SN74AHCT125N.ato" import SN74AHCT125N_package
+from "parts/ScrewTerminal_2.54_3P/ScrewTerminal_2.54_3P.ato" import ScrewTerminal_2x54_3P_package
+from "parts/Resistor_TH_68R/Resistor_TH_68R.ato" import Resistor_TH_68R_package
+from "parts/Capacitor_TH_100nF/Capacitor_TH_100nF.ato" import Capacitor_TH_100nF_package
+
+module LevelShifter:
+
+    mcu    = new ESP32S3SuperMini
+    ic     = new SN74AHCT125N_package
+    term_a = new ScrewTerminal_2x54_3P_package
+    term_b = new ScrewTerminal_2x54_3P_package
+    res1   = new Resistor_TH_68R_package   # series resistor on OUT1
+    res2   = new Resistor_TH_68R_package   # series resistor on OUT2
+    cap1   = new Capacitor_TH_100nF_package  # decoupling cap on IC VCC
+
+    # ── Power ─────────────────────────────────────────────────────────────────
+    mcu.vcc_5v ~ ic.14   # IC VCC from ESP32 5V pin
+    mcu.gnd    ~ ic.7    # IC GND
+
+    # ── Decoupling cap across IC VCC/GND ──────────────────────────────────────
+    mcu.vcc_5v ~ cap1.1
+    mcu.gnd    ~ cap1.2
+
+    # ── ~OE pins all tied low (outputs always enabled) ────────────────────────
+    mcu.gnd ~ ic.1       # ~1OE
+    mcu.gnd ~ ic.4       # ~2OE
+    mcu.gnd ~ ic.10      # ~3OE
+    mcu.gnd ~ ic.13      # ~4OE
+
+    # ── ESP32 GP1–GP2 → level shifter inputs (channels 1 & 2) ────────────────
+    mcu.gp1 ~ ic.2       # GP1 → 1A
+    mcu.gp2 ~ ic.5       # GP2 → 2A
+
+    # ── Unused channels 3 & 4: tie inputs to GND ─────────────────────────────
+    mcu.gnd ~ ic.9       # 3A → GND
+    mcu.gnd ~ ic.12      # 4A → GND
+
+    # ── Series resistors on outputs ───────────────────────────────────────────
+    ic.3 ~ res1.1; ic.6 ~ res2.1   # IC outputs → resistor inputs
+
+    # ── Resistor outputs → both screw terminals (electrically identical) ──────
+    res1.2 ~ term_a.1; res1.2 ~ term_b.1   # OUT1 via 68R
+    res2.2 ~ term_a.2; res2.2 ~ term_b.2   # OUT2 via 68R
+    mcu.gnd ~ term_a.3; mcu.gnd ~ term_b.3  # GND

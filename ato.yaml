@@ -1,0 +1,9 @@
+requires-atopile: ">=0.14.0"
+
+paths:
+  src: elec/src
+  layout: elec/layouts
+
+builds:
+  default:
+    entry: elec/src/level_shifter.ato:LevelShifter

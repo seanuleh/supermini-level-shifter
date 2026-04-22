@@ -1,0 +1,55 @@
+"""
+ESP32-S3 Super Mini socket module.
+Two 1x9 female 2.54mm pin headers that accept the ESP32-S3 Super Mini module.
+
+Left header  (J_left):  TX, RX, GP1–GP7    (matches ESP32 left side, top→bottom)
+Right header (J_right): 5V, GND, 3V3, GP13, GP12, GP11, GP10, GP9, GP8 (right side)
+"""
+
+from "parts/Header1x9F/Header1x9F.ato" import Header1x9F_package
+
+module ESP32S3SuperMini:
+
+    signal tx
+    signal rx
+    signal gp1
+    signal gp2
+    signal gp3
+    signal gp4
+    signal gp5
+    signal gp6
+    signal gp7
+    signal vcc_5v
+    signal gnd
+    signal vcc_3v3
+    signal gp13
+    signal gp12
+    signal gp11
+    signal gp10
+    signal gp9
+    signal gp8
+
+    header_left  = new Header1x9F_package
+    header_right = new Header1x9F_package
+
+    # Left header — top to bottom: TX, RX, GP1–GP7
+    header_left.1 ~ tx
+    header_left.2 ~ rx
+    header_left.3 ~ gp1
+    header_left.4 ~ gp2
+    header_left.5 ~ gp3
+    header_left.6 ~ gp4
+    header_left.7 ~ gp5
+    header_left.8 ~ gp6
+    header_left.9 ~ gp7
+
+    # Right header — top to bottom: 5V, GND, 3V3, GP13, GP12, GP11, GP10, GP9, GP8
+    header_right.1 ~ vcc_5v
+    header_right.2 ~ gnd
+    header_right.3 ~ vcc_3v3
+    header_right.4 ~ gp13
+    header_right.5 ~ gp12
+    header_right.6 ~ gp11
+    header_right.7 ~ gp10
+    header_right.8 ~ gp9
+    header_right.9 ~ gp8

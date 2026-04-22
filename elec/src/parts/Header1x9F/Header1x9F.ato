@@ -1,0 +1,25 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import is_atomic_part
+import has_part_picked
+
+component Header1x9F_package:
+    """
+    Generic 1x9 through-hole female pin header, 2.54mm pitch.
+    Used as socket for ESP32-S3 Super Mini castellated module.
+    Hand-solder only — order any compatible 2.54mm 1x9 female header.
+    """
+
+    trait is_atomic_part<manufacturer="Generic", partnumber="PinSocket_1x09_2.54mm", footprint="PinSocket_1x09_P2.54mm_Vertical.kicad_mod", symbol="", model="">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_HDR1X9F", manufacturer="Generic", partno="PinSocket_1x09_2.54mm">
+    trait has_designator_prefix<prefix="J">
+
+    pin 1
+    pin 2
+    pin 3
+    pin 4
+    pin 5
+    pin 6
+    pin 7
+    pin 8
+    pin 9

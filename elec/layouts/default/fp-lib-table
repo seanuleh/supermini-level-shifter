@@ -1,0 +1,38 @@
+(fp_lib_table
+	(version 7)
+	(lib
+		(name "Header1x9F")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/Header1x9F")
+		(options "")
+		(descr "atopile: part lib: Header1x9F")
+	)
+	(lib
+		(name "SN74AHCT125N")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/SN74AHCT125N")
+		(options "")
+		(descr "atopile: part lib: SN74AHCT125N")
+	)
+	(lib
+		(name "ScrewTerminal_2.54_3P")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/ScrewTerminal_2.54_3P")
+		(options "")
+		(descr "atopile: part lib: ScrewTerminal_2.54_3P")
+	)
+	(lib
+		(name "Resistor_TH_68R")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/Resistor_TH_68R")
+		(options "")
+		(descr "atopile: part lib: Resistor_TH_68R")
+	)
+	(lib
+		(name "Capacitor_TH_100nF")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/Capacitor_TH_100nF")
+		(options "")
+		(descr "atopile: part lib: Capacitor_TH_100nF")
+	)
+)
