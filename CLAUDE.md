@@ -86,3 +86,24 @@ Headers must be spaced **18mm center-to-center** to match the ESP32-S3 Super Min
 - GP3 is a strapping pin on ESP32-S3 — keep idle-high, do not use for level shifter inputs
 - atopile build updates nets in the .kicad_pcb without touching placement or routing
 - 12V rail is present on the PCB — ensure wide traces (≥1mm) on 12V power paths in KiCAD layout
+
+## ⚠️ Layout TODO (pick up here next session)
+
+- Remove all existing tracks (Tools → Scripting Console: `import pcbnew; b=pcbnew.GetBoard(); [b.Delete(t) for t in b.GetTracks()]; pcbnew.Refresh()`)
+- Fill GND on both F.Cu and B.Cu first
+- Then route non-GND signals only (12V, 5V, data) — pour steps aside automatically
+- Refill (`B`) when done
+
+## ⚠️ Footprints Needing Physical Verification
+
+Both new module footprints were created from **estimated pad positions using product images only**. Before ordering the PCB, measure the real modules with calipers and update the footprints accordingly.
+
+### U2 — Buck Module (MP1584EN, `BuckModule_5V_Direct.kicad_mod`)
+- Pad positions estimated: IN+/IN− at Y=±8.0mm on long edges (X=±8.5mm), OUT+/OUT− at Y=±8.0mm
+- **Measure**: exact Y position of each castellated pad from the top/bottom edge of the module
+- File: `elec/src/parts/BuckModule_5V/BuckModule_5V_Direct.kicad_mod`
+
+### J5 — PD Trigger Board (`PDTrigger_Direct.kicad_mod`)
+- Pad positions estimated: +/− pads at X=±3.0mm, Y=+6.0mm from board center
+- **Measure**: exact spacing between + and − pads, and distance from the non-USB-C board edge
+- File: `elec/src/parts/PowerConnector_1x2/PDTrigger_Direct.kicad_mod`

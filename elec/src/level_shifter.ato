@@ -50,49 +50,54 @@ module LevelShifter:
     buck   = new BuckModule_5V_package           # 12V → 5V for ESP32 + IC
     pwr_in = new PowerConnector_1x2_package      # 12V input from PD trigger board
 
-    # ── 12V power input (from PD trigger board via wire leads) ────────────────
-    pwr_in.1 ~ mcu.vcc_5v   # 12V net — NOTE: vcc_5v here is just a net name;
-                              # actual 12V only reaches screw terminals and buck IN+
-    pwr_in.2 ~ mcu.gnd
+    signal vcc_12v   # 12V rail — from PD trigger, feeds buck IN+ and screw terminals
+    signal gnd
+
+    # ── 12V power input ───────────────────────────────────────────────────────
+    pwr_in.1 ~ vcc_12v
+    pwr_in.2 ~ gnd
+
+    # ── Common GND ────────────────────────────────────────────────────────────
+    gnd ~ mcu.gnd
 
     # ── Buck module: 12V → 5V ─────────────────────────────────────────────────
-    pwr_in.1  ~ buck.1      # IN+  ← 12V
-    mcu.gnd   ~ buck.2      # IN−  ← GND
-    mcu.vcc_5v ~ buck.3     # OUT+ → 5V rail (ESP32 5V pin + IC VCC)
-    mcu.gnd   ~ buck.4      # OUT− ← GND
+    vcc_12v    ~ buck.1      # IN+  ← 12V
+    gnd        ~ buck.2      # IN−  ← GND
+    mcu.vcc_5v ~ buck.3      # OUT+ → 5V rail → ESP32 5V pin + IC VCC
+    gnd        ~ buck.4      # OUT− ← GND
 
     # ── IC power from 5V buck output ──────────────────────────────────────────
-    mcu.vcc_5v ~ ic.14      # IC VCC (5V)
-    mcu.gnd    ~ ic.7       # IC GND
+    mcu.vcc_5v ~ ic.14       # IC VCC (5V)
+    gnd        ~ ic.7        # IC GND
 
     # ── Decoupling cap across IC VCC/GND ──────────────────────────────────────
     mcu.vcc_5v ~ cap1.1
-    mcu.gnd    ~ cap1.2
+    gnd        ~ cap1.2
 
     # ── ~OE pins all tied low (outputs always enabled) ────────────────────────
-    mcu.gnd ~ ic.1          # ~1OE
-    mcu.gnd ~ ic.4          # ~2OE
-    mcu.gnd ~ ic.10         # ~3OE
-    mcu.gnd ~ ic.13         # ~4OE
+    gnd ~ ic.1               # ~1OE
+    gnd ~ ic.4               # ~2OE
+    gnd ~ ic.10              # ~3OE
+    gnd ~ ic.13              # ~4OE
 
     # ── ESP32 GP1–GP2 → level shifter inputs (channels 1 & 2) ────────────────
-    mcu.gp1 ~ ic.2          # GP1 → 1A
-    mcu.gp2 ~ ic.5          # GP2 → 2A
+    mcu.gp1 ~ ic.2           # GP1 → 1A
+    mcu.gp2 ~ ic.5           # GP2 → 2A
 
     # ── Unused channels 3 & 4: tie inputs to GND ─────────────────────────────
-    mcu.gnd ~ ic.9          # 3A → GND
-    mcu.gnd ~ ic.12         # 4A → GND
+    gnd ~ ic.9               # 3A → GND
+    gnd ~ ic.12              # 4A → GND
 
     # ── Series resistors on IC outputs ────────────────────────────────────────
-    ic.3 ~ res1.1           # 1Y → res1 in
-    ic.6 ~ res2.1           # 2Y → res2 in
+    ic.3 ~ res1.1            # 1Y → res1 in
+    ic.6 ~ res2.1            # 2Y → res2 in
 
     # ── Screw terminal A — channel 1 (GP1): 12V | DATA | GND ─────────────────
-    pwr_in.1  ~ term_a.1    # +12V
-    res1.2    ~ term_a.2    # DATA1 (GP1 via 68Ω)
-    mcu.gnd   ~ term_a.3    # GND
+    vcc_12v ~ term_a.1       # +12V
+    res1.2  ~ term_a.2       # DATA1 (GP1 via 68Ω)
+    gnd     ~ term_a.3       # GND
 
     # ── Screw terminal B — channel 2 (GP2): 12V | DATA | GND ─────────────────
-    pwr_in.1  ~ term_b.1    # +12V
-    res2.2    ~ term_b.2    # DATA2 (GP2 via 68Ω)
-    mcu.gnd   ~ term_b.3    # GND
+    vcc_12v ~ term_b.1       # +12V
+    res2.2  ~ term_b.2       # DATA2 (GP2 via 68Ω)
+    gnd     ~ term_b.3       # GND

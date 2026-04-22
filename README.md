@@ -1,56 +1,71 @@
-# Hyper Level Shifter
+# Hyper Level Shifter — Integrated Power Variant
 
-A simple through-hole PCB that pairs an ESP32-S3 Super Mini with a SN74AHCT125N quad bus buffer to shift 3.3V GPIO signals up to 5V logic — designed for driving WS2812B/SK6812 LED strips with [HyperK](https://github.com/hyperion-project/hyperion.ng) / [HyperHDR](https://github.com/awawa-dev/HyperHDR) ambilight setups.
+A through-hole PCB that pairs an ESP32-S3 Super Mini with a SN74AHCT125N quad bus buffer to shift 3.3V GPIO signals up to 5V, **plus integrated USB-C PD power** for driving 12V SK6812 RGBW LED strips with [HyperK](https://github.com/hyperion-project/hyperion.ng) / [HyperHDR](https://github.com/awawa-dev/HyperHDR) ambilight setups.
 
-## Features
+> **Two variants exist:**
+> - `main` branch — signal-only level shifter, external 5V power
+> - `integrated-power` branch (this) — USB-C PD input, onboard 12V→5V buck, 12V to strip
 
-- Socket for ESP32-S3 Super Mini (2× 1×9 female 2.54mm headers)
-- DIP-14 socket for SN74AHCT125N logic level shifter (3.3V → 5V)
-- Dual 3-pin 2.54mm screw terminals (top + bottom — choose whichever orientation suits your wiring)
-- 68Ω series resistors on data outputs for signal integrity
-- 100nF decoupling capacitor on IC VCC
-- All through-hole components — no SMD soldering required
+## Power Architecture
+
+```
+USB-C PD charger (45W, 12V)
+  → PD trigger board (J5, 9×14mm) → 12V rail
+      ├─ 12V → buck module (U2, MP1584EN) → 5V → ESP32 + IC
+      └─ 12V → screw terminals pin 1 → LED strip power (~120 LEDs @ 3A max)
+```
 
 ## Screw Terminal Pinout
 
-Both terminals are electrically identical:
+Each terminal is independent (one per LED strip channel):
 
 | Pin | Signal | Description |
 |-----|--------|-------------|
-| 1   | DATA1  | GP1 level-shifted (5V logic) — LED segment 1 |
-| 2   | DATA2  | GP2 level-shifted (5V logic) — LED segment 2 |
-| 3   | GND    | Ground reference |
+| 1   | +12V   | LED strip power (direct from PD trigger) |
+| 2   | DATA   | Level-shifted 5V data signal (via 68Ω) |
+| 3   | GND    | Ground |
 
-> Power (5V) for the LED strips should come from a dedicated 5V supply, not the ESP32.
+Pinout matches SK6812 RGBW 12V strip connector order — plug straight in.
 
-## Signal Path
+## Signal & Power Path
 
 ```
-ESP32 GP1 (3.3V) → SN74AHCT125N 1A → 1Y → 68Ω → Terminal pin 1
-ESP32 GP2 (3.3V) → SN74AHCT125N 2A → 2Y → 68Ω → Terminal pin 2
-ESP32 GND ──────────────────────────────────────→ Terminal pin 3
-ESP32 5V  ──────────────────────────────────────→ IC VCC (pin 14)
+USB-C PD → J5 (PD trigger, 12V out)
+  → vcc_12v rail → U2 buck IN+ → U2 OUT+ → 5V → ESP32 5V pin + U1 VCC
+  → vcc_12v rail → term_a/term_b pin 1 (LED strip power)
+
+ESP32 GP1 (3.3V) → U1 1A → 1Y → 68Ω (R1) → term_a pin 2 (DATA ch1)
+ESP32 GP2 (3.3V) → U1 2A → 2Y → 68Ω (R2) → term_b pin 2 (DATA ch2)
+GND ──────────────────────────────────────→ term_a/term_b pin 3
 ```
 
 ## BOM
 
-All parts are hand-soldered. No JLCPCB assembly required — order the bare PCB only.
-
 | Ref | Part | Notes |
 |-----|------|-------|
-| J1, J2 | 1×9 female 2.54mm pin header | 2× required |
+| J1, J2 | 1×9 female 2.54mm pin header | ESP32 socket |
 | U1 | SN74AHCT125N | DIP-14, e.g. LCSC C5907 |
 | — | DIP-14 IC socket | Order separately |
-| J3, J4 | 3-pin 2.54mm screw terminal | e.g. KF128-2.54-3P, Phoenix MPT-0.5/3-2.54 |
+| J3, J4 | 3-pin 2.54mm screw terminal | KF128-2.54-3P or Phoenix MPT-0.5/3-2.54 |
 | R1, R2 | 68Ω 1/8W axial resistor | Any 62–100Ω 1/8W axial |
 | C1 | 100nF ceramic disc capacitor | 50V, 2.5mm pitch |
+| U2 | MP1584EN buck module, 5V fixed | 22.3×17mm, AliExpress — search "MP1584EN mini buck 5V fixed" |
+| J5 | USB-C PD trigger board | 9×14mm, AliExpress — search "PD QC decoy trigger module" — configure for 12V before mounting |
+
+## ⚠️ Footprints Needing Physical Verification
+
+**U2 and J5 footprints were estimated from product images.** Measure with calipers when modules arrive and update pad positions in KiCAD before ordering the PCB.
+
+See `CLAUDE.md` for exact details on what to measure.
 
 ## Assembly Notes
 
-- Install the DIP-14 socket first, then insert the SN74AHCT125N IC into the socket
-- ESP32-S3 Super Mini plugs into J1/J2 with USB-C port facing toward the "USB Port ↑" silkscreen label
-- The decoupling cap (C1) is non-polarised — orientation doesn't matter
-- LED strip power should come from a dedicated 5V PSU; the ESP32 5V pin cannot source enough current for a full TV ambilight run
+- Configure J5 (PD trigger) for **12V output** by bridging the correct solder pads on its front **before** mounting it on the PCB — you won't have access after
+- J5 mounts back-down with USB-C overhanging the PCB edge
+- U2 (buck module) mounts flat-face-down, soldering its castellated corner pads to the PCB
+- Use a **45W+ USB-C PD charger** that supports 12V/3A output
+- Install DIP-14 socket first, then insert SN74AHCT125N
+- ESP32-S3 Super Mini plugs into J1/J2 with USB-C toward the "USB Port ↑" silkscreen
 
 ## Project Structure
 
@@ -67,5 +82,7 @@ elec/src/
     ScrewTerminal_2.54_3P/      # 3-pin screw terminal
     Resistor_TH_68R/            # 68Ω axial resistor
     Capacitor_TH_100nF/         # 100nF ceramic disc cap
+    BuckModule_5V/              # MP1584EN 5V buck module
+    PowerConnector_1x2/         # PD trigger board connection
 elec/layouts/default/           # KiCAD PCB layout
 ```

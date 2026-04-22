@@ -18,7 +18,7 @@ component BuckModule_5V_package:
       Pin 4: OUT− — GND
     """
 
-    trait is_atomic_part<manufacturer="Generic", partnumber="BuckModule_MP1584EN_5V", footprint="PinHeader_2x02_P2.54mm_Vertical.kicad_mod", symbol="", model="">
+    trait is_atomic_part<manufacturer="Generic", partnumber="BuckModule_MP1584EN_5V", footprint="BuckModule_5V_Direct.kicad_mod", symbol="", model="">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_BUCKMOD5V", manufacturer="Generic", partno="BuckModule_MP1584EN_5V">
     trait has_designator_prefix<prefix="U">
 

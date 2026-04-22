@@ -12,7 +12,7 @@ component PowerConnector_1x2_package:
     Pin 2: GND  (from PD trigger board − pad)
     """
 
-    trait is_atomic_part<manufacturer="Generic", partnumber="PinHeader_1x02_2.54mm", footprint="PinHeader_1x02_P2.54mm_Vertical.kicad_mod", symbol="", model="">
+    trait is_atomic_part<manufacturer="Generic", partnumber="PinHeader_1x02_2.54mm", footprint="PDTrigger_Direct.kicad_mod", symbol="", model="">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_HDR1X2", manufacturer="Generic", partno="PinHeader_1x02_2.54mm">
     trait has_designator_prefix<prefix="J">
 
