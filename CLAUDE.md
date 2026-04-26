@@ -62,7 +62,7 @@ Right header (J2, header_right) — pin 1 at top:
 | 8 | GP9 |
 | 9 | GP8 |
 
-Headers must be spaced **18mm center-to-center** to match the ESP32-S3 Super Mini module width.
+Headers must be spaced **15.5mm center-to-center** (pin row to pin row, verified by physical measurement). The module body is 18mm wide outer edge to outer edge, but the through-hole pin rows are inset ~1.25mm each side.
 
 ## atopile Notes
 
