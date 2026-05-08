@@ -2,7 +2,13 @@
 
 A simple through-hole PCB that pairs an ESP32-S3 Super Mini with a SN74AHCT125N quad bus buffer to shift 3.3V GPIO signals up to 5V logic — designed for driving WS2812B/SK6812 LED strips with [HyperK](https://github.com/hyperion-project/hyperion.ng) / [HyperHDR](https://github.com/awawa-dev/HyperHDR) ambilight setups.
 
-![PCB Render](render.png)
+<table><tr>
+<td><img src="front.png" alt="PCB Front"/></td>
+<td><img src="back.png" alt="PCB Back"/></td>
+</tr><tr>
+<td align="center">Front</td>
+<td align="center">Back</td>
+</tr></table>
 
 **[Download Gerbers (ZIP)](https://github.com/seanuleh/supermini-level-shifter/raw/main/manufacturing/default/default.gerber.zip)** — ready for JLCPCB / PCBWay (order bare PCB only)
 
