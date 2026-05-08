@@ -1,6 +1,6 @@
 # Hyper Level Shifter
 
-A simple through-hole PCB that pairs an ESP32-S3 Super Mini with a SN74AHCT125N quad bus buffer to shift 3.3V GPIO signals up to 5V logic — designed for driving WS2812B/SK6812 LED strips with [HyperK](https://github.com/hyperion-project/hyperion.ng) / [HyperHDR](https://github.com/awawa-dev/HyperHDR) ambilight setups.
+A simple through-hole PCB that pairs an ESP32-S3 Super Mini with a SN74AHCT125N quad bus buffer to shift 3.3V GPIO signals up to 5V logic — designed for driving WS2812B/SK6812 LED strips with [Hyperk](https://github.com/awawa-dev/Hyperk) / [HyperHDR](https://github.com/awawa-dev/HyperHDR) ambilight setups.
 
 <table><tr>
 <td><img src="front.png" alt="PCB Front"/></td>
