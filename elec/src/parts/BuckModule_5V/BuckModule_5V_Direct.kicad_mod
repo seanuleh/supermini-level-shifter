@@ -2,7 +2,7 @@
 	(version 20241229)
 	(generator "hand-crafted")
 	(layer "F.Cu")
-	(descr "MP1584EN 5V fixed buck module, 22.3x17mm (portrait: 17mm wide, 22.3mm tall). Castellated pads on long edges. IN-/OUT- on left edge, IN+/OUT+ on right edge. Pad positions ESTIMATED from product images — verify with calipers before routing.")
+	(descr "MP1584EN 5V fixed buck module, 22.3x17mm (portrait: 17mm wide, 22.3mm tall) per SZYTF datasheet. Surface-mount (reflow) — 8 castellated pads on the two short edges, 2 pads per corner group at 2.0mm pitch. Outer pad of each group bisected by the short edge (center at Y=±11.15); inner pad 2.0mm inboard (Y=±9.15). Pad column centers 1.5mm in from the long edges (X=±7.0, measured). IN+/IN- share one short end, OUT+/OUT- the other; IN+/OUT+ on left (-X), IN-/OUT- on right (+X).")
 	(tags "buck converter MP1584EN 5V module direct mount SMD")
 	(property "Reference" "REF**"
 		(at 0 -13.0 0)
@@ -32,44 +32,71 @@
 	)
 
 	(fp_text user "IN+"
-		(at -6.0 -8.0 0)
+		(at -6.0 -9.15 0)
 		(layer "F.SilkS")
 		(effects (font (size 0.6 0.6) (thickness 0.1)))
 	)
 	(fp_text user "IN-"
-		(at 6.0 -8.0 0)
+		(at 6.0 -9.15 0)
 		(layer "F.SilkS")
 		(effects (font (size 0.6 0.6) (thickness 0.1)))
 	)
 	(fp_text user "OUT+"
-		(at -6.0 8.0 0)
+		(at -6.0 9.15 0)
 		(layer "F.SilkS")
 		(effects (font (size 0.6 0.6) (thickness 0.1)))
 	)
 	(fp_text user "OUT-"
-		(at 6.0 8.0 0)
+		(at 6.0 9.15 0)
 		(layer "F.SilkS")
 		(effects (font (size 0.6 0.6) (thickness 0.1)))
 	)
 
+	; IN+ — left edge, input end (outer corner pad bisected by short edge + inner, 2.54mm pitch)
 	(pad "1" smd rect
-		(at -8.5 -8.0)
-		(size 2.5 2.5)
+		(at -7.0 -11.15)
+		(size 2.0 2.0)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+	(pad "1" smd rect
+		(at -7.0 -9.15)
+		(size 2.0 2.0)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+
+	; IN- — right edge, input end (outer + inner)
+	(pad "2" smd rect
+		(at 7.0 -11.15)
+		(size 2.0 2.0)
 		(layers "F.Cu" "F.Paste" "F.Mask")
 	)
 	(pad "2" smd rect
-		(at 8.5 -8.0)
-		(size 2.5 2.5)
+		(at 7.0 -9.15)
+		(size 2.0 2.0)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+
+	; OUT+ — left edge, output end (outer + inner)
+	(pad "3" smd rect
+		(at -7.0 11.15)
+		(size 2.0 2.0)
 		(layers "F.Cu" "F.Paste" "F.Mask")
 	)
 	(pad "3" smd rect
-		(at -8.5 8.0)
-		(size 2.5 2.5)
+		(at -7.0 9.15)
+		(size 2.0 2.0)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+	)
+
+	; OUT- — right edge, output end (outer + inner)
+	(pad "4" smd rect
+		(at 7.0 11.15)
+		(size 2.0 2.0)
 		(layers "F.Cu" "F.Paste" "F.Mask")
 	)
 	(pad "4" smd rect
-		(at 8.5 8.0)
-		(size 2.5 2.5)
+		(at 7.0 9.15)
+		(size 2.0 2.0)
 		(layers "F.Cu" "F.Paste" "F.Mask")
 	)
 

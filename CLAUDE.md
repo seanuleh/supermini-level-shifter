@@ -94,16 +94,14 @@ Headers must be spaced **18mm center-to-center** to match the ESP32-S3 Super Min
 - Then route non-GND signals only (12V, 5V, data) — pour steps aside automatically
 - Refill (`B`) when done
 
-## ⚠️ Footprints Needing Physical Verification
-
-Both new module footprints were created from **estimated pad positions using product images only**. Before ordering the PCB, measure the real modules with calipers and update the footprints accordingly.
+## Module Footprints — ✅ VERIFIED (measured from physical parts)
 
 ### U2 — Buck Module (MP1584EN, `BuckModule_5V_Direct.kicad_mod`)
-- Pad positions estimated: IN+/IN− at Y=±8.0mm on long edges (X=±8.5mm), OUT+/OUT− at Y=±8.0mm
-- **Measure**: exact Y position of each castellated pad from the top/bottom edge of the module
-- File: `elec/src/parts/BuckModule_5V/BuckModule_5V_Direct.kicad_mod`
+22.3×17mm. 8 castellated pads on the two short edges, outer pad bisected by short edge
+(Y=±11.15), inner 2.0mm inboard (Y=±9.15); columns 1.5mm in from long edges (X=±7.0).
+IN+/IN− one short end, OUT+/OUT− the other; + on -X, − on +X. Net mapping correct.
 
 ### J5 — PD Trigger Board (`PDTrigger_Direct.kicad_mod`)
-- Pad positions estimated: +/− pads at X=±3.0mm, Y=+6.0mm from board center
-- **Measure**: exact spacing between + and − pads, and distance from the non-USB-C board edge
-- File: `elec/src/parts/PowerConnector_1x2/PDTrigger_Direct.kicad_mod`
+10×13mm PCB + USB-C overhang. 2 plated output holes (1mm dia), 0.5mm in from bottom and
+side edges → X=±4.5, Y=+6.0 (9mm apart). Surface-mount soldered onto SMD lands.
+pad1 = + (12V), pad2 = − (GND). Configure to 12V before mounting.

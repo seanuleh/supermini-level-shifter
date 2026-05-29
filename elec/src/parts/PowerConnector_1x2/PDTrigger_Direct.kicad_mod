@@ -2,84 +2,84 @@
 	(version 20241229)
 	(generator "hand-crafted")
 	(layer "F.Cu")
-	(descr "USB-C PD trigger board, 9x14mm + 4mm USB-C overhang. Mount back-down on PCB. USB-C hangs off PCB edge. + and - output pads are on the board back at the non-USB-C end, aligned to F.Cu SMD pads below. Configure for 12V by bridging appropriate solder pads on front before mounting. Pad positions ESTIMATED from product images.")
-	(tags "PD trigger USB-C 12V power direct mount")
+	(descr "USB-C PD trigger board (CH224K-style, configurable), 10x13mm PCB + USB-C overhang on one short edge. Surface-mount: 2 plated output holes (1mm dia) at the output end, centers 0.5mm in from the bottom and side edges -> X=±4.5, Y=+6.0 (9mm apart). Solder the board's + and - holes down onto these SMD lands. Set output to 12V (bridge row-2 pad) BEFORE mounting. pad1 = + (12V), pad2 = - (GND); verify + side against board silkscreen when placing.")
+	(tags "PD trigger USB-C 12V power surface mount")
 	(property "Reference" "REF**"
-		(at 0 -10.0 0)
+		(at 0 -7.6 0)
 		(layer "F.SilkS")
 		(effects (font (size 1 1) (thickness 0.15)))
 	)
 	(property "Value" "PDTrigger_Direct"
-		(at 0 10.0 0)
+		(at 0 7.8 0)
 		(layer "F.Fab")
 		(effects (font (size 1 1) (thickness 0.15)))
 	)
 	(attr smd)
 
+	; board outline (10 x 13mm)
 	(fp_rect
-		(start -4.5 -7.0)
-		(end 4.5 7.0)
+		(start -5.0 -6.5)
+		(end 5.0 6.5)
 		(stroke (width 0.05) (type solid))
 		(fill no)
 		(layer "F.CrtYd")
 	)
 	(fp_rect
-		(start -4.5 -7.0)
-		(end 4.5 7.0)
+		(start -5.0 -6.5)
+		(end 5.0 6.5)
 		(stroke (width 0.12) (type solid))
 		(fill no)
 		(layer "F.Fab")
 	)
 
+	; USB-C connector overhang (hangs off the PCB edge)
 	(fp_rect
-		(start -4.5 -11.0)
-		(end 4.5 -7.0)
+		(start -4.5 -10.5)
+		(end 4.5 -6.5)
 		(stroke (width 0.05) (type solid))
 		(fill no)
 		(layer "F.CrtYd")
 	)
 	(fp_rect
-		(start -4.5 -11.0)
-		(end 4.5 -7.0)
+		(start -4.5 -10.5)
+		(end 4.5 -6.5)
 		(stroke (width 0.05) (type solid))
 		(fill no)
 		(layer "F.Fab")
 	)
 
 	(fp_text user "USB-C"
-		(at 0 -9.0 0)
+		(at 0 -8.5 0)
 		(layer "F.SilkS")
 		(effects (font (size 0.6 0.6) (thickness 0.1)))
 	)
 	(fp_text user "+"
-		(at -3.0 4.5 0)
+		(at 3.2 4.3 0)
 		(layer "F.SilkS")
 		(effects (font (size 0.8 0.8) (thickness 0.12)))
 	)
 	(fp_text user "-"
-		(at 3.0 4.5 0)
+		(at -3.2 4.3 0)
 		(layer "F.SilkS")
 		(effects (font (size 0.8 0.8) (thickness 0.12)))
 	)
-	(fp_text user "CFG"
-		(at 0 -5.0 0)
-		(layer "F.Fab")
-		(effects (font (size 0.6 0.6) (thickness 0.1)))
-	)
-	(fp_text user "configure 12V before mounting"
-		(at 0 8.5 0)
+	(fp_text user "config 12V before mounting"
+		(at 0 0 0)
 		(layer "F.Fab")
 		(effects (font (size 0.5 0.5) (thickness 0.08)))
 	)
 
-	(pad "1" smd rect
-		(at -3.0 6.0)
-		(size 1.8 1.8)
+	; + output (12V) -> pad 1
+	(pad "1" smd circle
+		(at 4.5 6.0)
+		(size 2.0 2.0)
 		(layers "F.Cu" "F.Paste" "F.Mask")
 	)
-	(pad "2" smd rect
-		(at 3.0 6.0)
-		(size 1.8 1.8)
+
+	; - output (GND) -> pad 2
+	(pad "2" smd circle
+		(at -4.5 6.0)
+		(size 2.0 2.0)
 		(layers "F.Cu" "F.Paste" "F.Mask")
 	)
 

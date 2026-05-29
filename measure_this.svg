@@ -1,0 +1,65 @@
+<svg width="480" height="320" xmlns="http://www.w3.org/2000/svg" font-family="monospace">
+
+  <!-- background -->
+  <rect width="480" height="320" fill="#f4f4f4"/>
+
+  <!-- board body: 22mm wide x 17mm tall, scaled 14px/mm -->
+  <!-- board: x=60..368, y=80..318 => 308px x 238px => ~22mm x ~17mm at 14px/mm -->
+  <!-- 22mm * 14 = 308px, 17mm * 14 = 238px -->
+  <!-- place board: left=60, top=51, right=368, bottom=289 -->
+
+  <rect x="60" y="51" width="308" height="238" fill="#1a1a2e" stroke="#555" stroke-width="2"/>
+
+  <!-- dimension labels -->
+  <text x="185" y="44" font-size="13" fill="#333" text-anchor="middle">22mm (long edge)</text>
+  <text x="390" y="175" font-size="13" fill="#333" transform="rotate(90,390,175)" text-anchor="middle">17mm</text>
+
+  <!-- ── pads on BOTTOM long edge, near RIGHT corner ── -->
+  <!-- outer pad: 2mm from right short edge = 2*14=28px left of x=368 => x=340 -->
+  <!-- inner pad: 2.54mm further left = 2.54*14=36px => x=304 -->
+  <!-- pad radius = 0.8mm * 14 = 11px, sits on bottom edge y=289 -->
+
+  <!-- outer pad -->
+  <circle cx="340" cy="289" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="329" y="278" width="22" height="11" fill="#1a1a2e"/><!-- clip top half -->
+
+  <!-- inner pad -->
+  <circle cx="304" cy="289" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="293" y="278" width="22" height="11" fill="#1a1a2e"/><!-- clip top half -->
+
+  <!-- ── pads on BOTTOM long edge, near LEFT corner ── -->
+  <circle cx="88" cy="289" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="77" y="278" width="22" height="11" fill="#1a1a2e"/>
+  <circle cx="124" cy="289" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="113" y="278" width="22" height="11" fill="#1a1a2e"/>
+
+  <!-- ── pads on TOP long edge, near RIGHT corner ── -->
+  <circle cx="340" cy="51" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="329" y="51" width="22" height="11" fill="#1a1a2e"/>
+  <circle cx="304" cy="51" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="293" y="51" width="22" height="11" fill="#1a1a2e"/>
+
+  <!-- ── pads on TOP long edge, near LEFT corner ── -->
+  <circle cx="88" cy="51" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="77" y="51" width="22" height="11" fill="#1a1a2e"/>
+  <circle cx="124" cy="51" r="11" fill="#c8860a" stroke="#996600" stroke-width="1.5"/>
+  <rect x="113" y="51" width="22" height="11" fill="#1a1a2e"/>
+
+  <!-- ── MEASUREMENT ARROW (red): right short edge → outer pad centre ── -->
+  <!-- along the bottom long edge, at y=310 -->
+  <line x1="340" y1="310" x2="368" y2="310" stroke="#e03030" stroke-width="2.5"/>
+  <!-- ticks -->
+  <line x1="340" y1="304" x2="340" y2="316" stroke="#e03030" stroke-width="2"/>
+  <line x1="368" y1="304" x2="368" y2="316" stroke="#e03030" stroke-width="2"/>
+  <!-- arrowheads -->
+  <polygon points="340,310 349,306 349,314" fill="#e03030"/>
+  <polygon points="368,310 359,306 359,314" fill="#e03030"/>
+
+  <!-- label -->
+  <text x="354" y="308" font-size="12" fill="#e03030" text-anchor="middle" dy="-6">MEASURE THIS</text>
+
+  <!-- right short edge label -->
+  <line x1="368" y1="51" x2="368" y2="289" stroke="#e03030" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="372" y="175" font-size="11" fill="#e03030" transform="rotate(90,372,175)" text-anchor="middle">right short edge</text>
+
+</svg>
