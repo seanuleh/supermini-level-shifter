@@ -1,0 +1,137 @@
+(footprint "KF141R_3P"
+	(version 20241229)
+	(generator "hand-crafted")
+	(layer "F.Cu")
+	(descr "KF141R-2.54-3P right-angle spring terminal. 3 signal pins + 3 NP retention pins. Pitch 2.54mm, row spacing 5.08mm, drill 1.2mm. Datasheet: LCSC C475125.")
+	(tags "THT spring terminal push-in KF141R 2.54mm right-angle")
+	(property "Reference" "REF**"
+		(at 2.54 -3.5 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "KF141R_3P"
+		(at 2.54 7.5 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_rect
+		(start -1.4 -1.4)
+		(end 6.5 6.5)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_line
+		(start -1.2 -1.2)
+		(end 6.3 -1.2)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -1.2 -1.2)
+		(end -1.2 6.3)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start 6.3 -1.2)
+		(end 6.3 6.3)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -1.2 6.3)
+		(end 6.3 6.3)
+		(stroke (width 0.12) (type solid))
+		(layer "F.SilkS")
+	)
+	(fp_line
+		(start -1.2 -1.2)
+		(end 6.3 -1.2)
+		(stroke (width 0.1) (type solid))
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -1.2 -1.2)
+		(end -1.2 6.3)
+		(stroke (width 0.1) (type solid))
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start 6.3 -1.2)
+		(end 6.3 6.3)
+		(stroke (width 0.1) (type solid))
+		(layer "F.Fab")
+	)
+	(fp_line
+		(start -1.2 6.3)
+		(end 6.3 6.3)
+		(stroke (width 0.1) (type solid))
+		(layer "F.Fab")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 2.54 2.54 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole roundrect
+		(at 0 0)
+		(size 1.8 1.8)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(roundrect_rratio 0.15)
+	)
+	(pad "2" thru_hole circle
+		(at 2.54 0)
+		(size 1.8 1.8)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+	)
+	(pad "3" thru_hole circle
+		(at 5.08 0)
+		(size 1.8 1.8)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+	)
+	(pad "" np_thru_hole circle
+		(at 0 5.08)
+		(size 1.2 1.2)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "" np_thru_hole circle
+		(at 2.54 5.08)
+		(size 1.2 1.2)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+	)
+	(pad "" np_thru_hole circle
+		(at 5.08 5.08)
+		(size 1.2 1.2)
+		(drill 1.2)
+		(layers "*.Cu" "*.Mask")
+	)
+	(embedded_fonts no)
+)

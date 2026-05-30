@@ -49,4 +49,11 @@
 		(options "")
 		(descr "atopile: part lib: PowerConnector_1x2")
 	)
+	(lib
+		(name "KF141R_3P")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../src/parts/KF141R_3P")
+		(options "")
+		(descr "atopile: part lib: KF141R_3P")
+	)
 )

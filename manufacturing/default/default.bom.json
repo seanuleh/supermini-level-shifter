@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "build_id": "da2bc8cf393a5206",
+  "build_id": "1a0d2a6bf3a4f2e2",
   "components": [
     {
       "id": "cnone_hdr1x9f",
@@ -27,6 +27,34 @@
         {
           "address": "level_shifter.ato::LevelShifter.mcu|esp32s3_super_mini.ato::ESP32S3SuperMini.header_right|parts/Header1x9F/Header1x9F.ato::Header1x9F_package",
           "designator": "J2"
+        }
+      ]
+    },
+    {
+      "id": "cnone_kf141r3p",
+      "lcsc": "CNONE_KF141R3P",
+      "manufacturer": "Cixi Kefa Electronics",
+      "mpn": "KF141R-2.54-3P",
+      "type": "connector",
+      "value": "",
+      "package": "KF141R_3P:KF141R_3P",
+      "description": null,
+      "quantity": 2,
+      "unitCost": null,
+      "stock": null,
+      "isBasic": null,
+      "isPreferred": null,
+      "source": "manual",
+      "datasheet": null,
+      "parameters": [],
+      "usages": [
+        {
+          "address": "level_shifter.ato::LevelShifter.term_a|parts/KF141R_3P/KF141R_3P.ato::KF141R_3P_package",
+          "designator": "J3"
+        },
+        {
+          "address": "level_shifter.ato::LevelShifter.term_b|parts/KF141R_3P/KF141R_3P.ato::KF141R_3P_package",
+          "designator": "J4"
         }
       ]
     },
@@ -59,15 +87,15 @@
       ]
     },
     {
-      "id": "cnone_screw3p254",
-      "lcsc": "CNONE_SCREW3P254",
+      "id": "cnone_buckmod5v",
+      "lcsc": "CNONE_BUCKMOD5V",
       "manufacturer": "Generic",
-      "mpn": "ScrewTerminal_2.54mm_3P",
-      "type": "connector",
+      "mpn": "BuckModule_MP1584EN_5V",
+      "type": "ic",
       "value": "",
-      "package": "ScrewTerminal_2.54_3P:TerminalBlock_Phoenix_MPT-0,5-3-2.54_1x03_P2.54mm_Horizontal",
+      "package": "BuckModule_5V:BuckModule_5V_Direct",
       "description": null,
-      "quantity": 2,
+      "quantity": 1,
       "unitCost": null,
       "stock": null,
       "isBasic": null,
@@ -77,12 +105,8 @@
       "parameters": [],
       "usages": [
         {
-          "address": "level_shifter.ato::LevelShifter.term_a|parts/ScrewTerminal_2.54_3P/ScrewTerminal_2.54_3P.ato::ScrewTerminal_2x54_3P_package",
-          "designator": "J3"
-        },
-        {
-          "address": "level_shifter.ato::LevelShifter.term_b|parts/ScrewTerminal_2.54_3P/ScrewTerminal_2.54_3P.ato::ScrewTerminal_2x54_3P_package",
-          "designator": "J4"
+          "address": "level_shifter.ato::LevelShifter.buck|parts/BuckModule_5V/BuckModule_5V.ato::BuckModule_5V_package",
+          "designator": "U2"
         }
       ]
     },
@@ -107,6 +131,30 @@
         {
           "address": "level_shifter.ato::LevelShifter.cap1|parts/Capacitor_TH_100nF/Capacitor_TH_100nF.ato::Capacitor_TH_100nF_package",
           "designator": "C1"
+        }
+      ]
+    },
+    {
+      "id": "cnone_hdr1x2",
+      "lcsc": "CNONE_HDR1X2",
+      "manufacturer": "Generic",
+      "mpn": "PinHeader_1x02_2.54mm",
+      "type": "connector",
+      "value": "",
+      "package": "PowerConnector_1x2:PDTrigger_Direct",
+      "description": null,
+      "quantity": 1,
+      "unitCost": null,
+      "stock": null,
+      "isBasic": null,
+      "isPreferred": null,
+      "source": "manual",
+      "datasheet": null,
+      "parameters": [],
+      "usages": [
+        {
+          "address": "level_shifter.ato::LevelShifter.pwr_in|parts/PowerConnector_1x2/PowerConnector_1x2.ato::PowerConnector_1x2_package",
+          "designator": "J5"
         }
       ]
     },

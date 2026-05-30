@@ -6,7 +6,10 @@
       "Bash(cp /Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints/Connector_PinHeader_2.54mm.pretty/PinHeader_2x02_P2.54mm_Vertical.kicad_mod /Users/sean/git/seanuleh/supermini-level-shifter/elec/src/parts/BuckModule_5V/)",
       "Bash(cp /Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints/Connector_PinHeader_2.54mm.pretty/PinHeader_1x02_P2.54mm_Vertical.kicad_mod /Users/sean/git/seanuleh/supermini-level-shifter/elec/src/parts/PowerConnector_1x2/)",
       "Bash(ato build:*)",
-      "Bash(ato dev:*)"
+      "Bash(ato dev:*)",
+      "Bash(python3 *)",
+      "Bash(awk 'NR>=158 && NR<=1300 && /^\\\\t\\\\\\(footprint/{fp=$0} NR==603{print \"Footprint context at 603:\", fp}' /Users/sean/git/seanuleh/supermini-level-shifter/elec/layouts/default/default.kicad_pcb)",
+      "WebFetch(domain:www.lcsc.com)"
     ]
   }
 }

@@ -1,0 +1,20 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import is_atomic_part
+import has_part_picked
+
+component KF141R_3P_package:
+    """
+    3-pin 2.54mm pitch right-angle spring terminal block. Through-hole, horizontal wire entry.
+    Push-button wire release. Rated 6A/250V. Compatible with KF141R-2.54-3P.
+    Pin 1: +12V, Pin 2: DATA, Pin 3: GND.
+    Hand-solder only.
+    """
+
+    trait is_atomic_part<manufacturer="Cixi Kefa Electronics", partnumber="KF141R-2.54-3P", footprint="KF141R_3P.kicad_mod", symbol="", model="">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="CNONE_KF141R3P", manufacturer="Cixi Kefa Electronics", partno="KF141R-2.54-3P">
+    trait has_designator_prefix<prefix="J">
+
+    pin 1
+    pin 2
+    pin 3

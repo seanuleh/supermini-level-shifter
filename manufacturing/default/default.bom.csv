@@ -1,6 +1,8 @@
 Designator,Footprint,Quantity,Value,Manufacturer,Partnumber,LCSC Part #
 C1,Capacitor_TH_100nF:C_Disc_D3.0mm_W1.6mm_P2.50mm,1,,Generic,C_100nF_TH_50V,CNONE_C100NF_TH
 "J1, J2",Header1x9F:PinSocket_1x09_P2.54mm_Vertical,2,,Generic,PinSocket_1x09_2.54mm,CNONE_HDR1X9F
-"J3, J4","ScrewTerminal_2.54_3P:TerminalBlock_Phoenix_MPT-0,5-3-2.54_1x03_P2.54mm_Horizontal",2,,Generic,ScrewTerminal_2.54mm_3P,CNONE_SCREW3P254
+"J3, J4",KF141R_3P:KF141R_3P,2,,Cixi Kefa Electronics,KF141R-2.54-3P,CNONE_KF141R3P
+J5,PowerConnector_1x2:PDTrigger_Direct,1,,Generic,PinHeader_1x02_2.54mm,CNONE_HDR1X2
 "R1, R2",Resistor_TH_68R:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal,2,,Generic,R_68R_TH_1/8W,CNONE_R68R_TH
 U1,SN74AHCT125N:DIP-14_W7.62mm,1,,Texas Instruments,SN74AHCT125N,CNONE_SN74AHCT125N
+U2,BuckModule_5V:BuckModule_5V_Direct,1,,Generic,BuckModule_MP1584EN_5V,CNONE_BUCKMOD5V

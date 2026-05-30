@@ -32,7 +32,7 @@ Buck module connection:
 
 from "esp32s3_super_mini.ato" import ESP32S3SuperMini
 from "parts/SN74AHCT125N/SN74AHCT125N.ato" import SN74AHCT125N_package
-from "parts/ScrewTerminal_2.54_3P/ScrewTerminal_2.54_3P.ato" import ScrewTerminal_2x54_3P_package
+from "parts/KF141R_3P/KF141R_3P.ato" import KF141R_3P_package
 from "parts/Resistor_TH_68R/Resistor_TH_68R.ato" import Resistor_TH_68R_package
 from "parts/Capacitor_TH_100nF/Capacitor_TH_100nF.ato" import Capacitor_TH_100nF_package
 from "parts/BuckModule_5V/BuckModule_5V.ato" import BuckModule_5V_package
@@ -42,8 +42,8 @@ module LevelShifter:
 
     mcu    = new ESP32S3SuperMini
     ic     = new SN74AHCT125N_package
-    term_a = new ScrewTerminal_2x54_3P_package   # channel 1: GP1
-    term_b = new ScrewTerminal_2x54_3P_package   # channel 2: GP2
+    term_a = new KF141R_3P_package   # channel 1: GP1
+    term_b = new KF141R_3P_package   # channel 2: GP2
     res1   = new Resistor_TH_68R_package         # series resistor on DATA1
     res2   = new Resistor_TH_68R_package         # series resistor on DATA2
     cap1   = new Capacitor_TH_100nF_package      # decoupling cap on IC VCC
